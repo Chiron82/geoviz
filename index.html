@@ -5,7 +5,55 @@
 	<title>Blood Lead Level Counts per Census Tract</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
 
+
+ <header>
+        <h1>Blood Lead Level Counts by Census Tract</h1>
+        <h2>Philadelphia, Pa</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Thomas Stewart</p>
+        <p></p>
+
+
+    </footer>
+
     <style>
+
+          body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #DC143C;
+        }
+        h2 {
+            display: inline-block;
+            color: #DC143C;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #DC143C;
+        }
 
        html { height:100%;}
     body {
@@ -37,13 +85,13 @@
 .info h1 {
     font-size: 16px;
     margin: 0 0 5px;
-    color: #777777;
+    color: #DC143C;
 }
 
 
 .legend {
     line-height: 18px;
-    color: #333333;
+    color: #DC143C;
     font-family: 'Open Sans', Helvetica, sans-serif;
     padding: 6px 8px;
     background: white;
@@ -194,17 +242,20 @@ $.getJSON("blood_lead.geojson",function(data){
         }
     }).addTo(map);
 });
+
+
    
-   function onEachFeatureFunc(feature, layer){
+function onEachFeatureFunc(feature, layer){
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click:     zoomFeature
+    
     });
     layer.bindPopup('Blood lead level:'+feature.properties.num_bll_5p)
 }
 ;
-function highlightFeature(e){
+    function highlightFeature(e){
     var layer = e.target;
 
     layer.setStyle({
@@ -217,7 +268,7 @@ function highlightFeature(e){
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-};
+}
 
 function resetHighlight(e) {
     neighborhoodsLayer.resetStyle(e.target)
