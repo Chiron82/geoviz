@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Blood Lead Levels by Census Tract</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+
+
+ <header>
+        <h1>Blood Lead Levels by Census Tract</h1>
+        <h2>Philadelphia, Pa</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Thomas Stewart</p>
+        <p></p>
+
+
+    </footer>
+
+    <style>
+
+          body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #DC143C;
+        }
+        h2 {
+            display: inline-block;
+            color: #DC143C;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #DC143C;
+        }
+
+       html { height:100%;}
+    body {
+        height:100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #map {
+        width: 100%;
+        margin: 0 auto;
+        height: 95%;
+    }
+
+        .info {
+    z-index: 1000;
+    position: absolute;
+    right: 40%;
+    top: 5%;
+    padding: 6px 8px;
+    font: 14px Arial, Helvetica, sans-serif;
+    text-align: center;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h1 {
+    font-size: 16px;
+    margin: 0 0 5px;
+    color: #DC143C;
+}
+
+
+.legend {
+    line-height: 18px;
+    color: #DC143C;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    padding: 6px 8px;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.legend i {
+    width: 28px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+
+.legend p {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+}
+
+    </style>
+
+
+</head>
+<body>
+    <!-- Our web map and content will go here -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div id="map" style="width: 1000px; height: 600px">
+    </div>
+    <script>
+    	var map = L.map('map', {center: [39.981192, -75.155399], zoom: 12});
+    	L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+    	map.doubleClickZoom.disable();
+
+        // add point marker
+
+/*var mydrexelStation = L.marker([39.9471, -75.2928]).addTo(map)
+var mysixtyninthStation = L.marker([39.9621, -75.2595]).addTo(map)
+var myfifteenthStation = L.marker([39.9525, -75.1654]).addTo(map)
+var mycecilbStation = L.marker([39.980, -75.157]).addTo(map)
+mydrexelStation.bindPopup("Drexel Hill Station: Where I embark.");
+mysixtyninthStation.bindPopup("69th Street Station: Where I transfer to Market-Frankford line.");
+myfifteenthStation.bindPopup("15th Street Station: Where I transfer to Broad Street line.");
+mycecilbStation.bindPopup("Cecil B. Moore Station: Where I terminate to Temple University.");
+*/
+/*mydrexelStation.bindPopup("Where I embark.");
+mydrexelStation.bindPopup("<h3>Drexel Station</h3><p>Drexel Hill, PA<br>Information about Drexel Station.</p>");
+*/
+// create a polyline
+// create a polyline
+/*var myDataLine = L.polyline([[39.9471, -75.2928],
+[39.9487, -75.2891],
+[39.9516, -75.2825],
+[39.9529, -75.2792],
+[39.9553, -75.2741],
+[39.9591, -75.2659],
+[39.9621, -75.2595],
+[39.9620, -75.2408],
+[39.9600, -75.2249],
+[39.9585, -75.2141],
+[39.9558, -75.1820],
+[39.9525, -75.1654],
+[39.9582, -75.1623],
+[39.9621, -75.1615],
+[39.9667, -75.1605],
+[39.9715, -75.1594],
+[39.980, -75.157], 
+                
+                ],
+                {color: 'yellow', weight: 6}).addTo(map);
+*/
+// Bind popup to line object
+/*myDataLine.bindPopup("My route to Temple Unversity");*/
+
+
+// create a polygon of Philadelphia metro
+/*var myArea = L.polygon([
+
+            [39.9471, -75.2928],
+            [39.9621, -75.2595],
+            [39.9525, -75.1654],
+            [39.980, -75.157]
+            ],
+            {color: 'grey', weight: 1}).addTo(map);
+             
+// Bind popup to area object
+
+myArea.bindPopup("Travel Area");
+*/
+
+/*// Create an Empty Popup
+var popup = L.popup();
+// Write function to set Properties of the Popup
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}*/
+
+/*// Listen for a click event on the Map element
+map.on('click', onMapClick);*/
+
+// load GeoJSON from an external file
+function styleFunc(feature) {
+    return {
+        fillColor: setColorFunc(feature.properties.num_bll_5p),
+        fillOpacity: 0.9,
+        weight: 1,
+        opacity: 1,
+        color: '#bababa',
+        dashArray: '3'
+    };
+};
+
+
+function setColorFunc(density){
+    return density > 80 ? '#404040' :
+           density > 60 ? '#bababa' :
+           density > 30 ? '#f4a582' :
+           density > 0 ? '#ca0020' :
+           density = 'null' ? '#fff5ee':
+                         '#BFBCBB';
+};
+
+  
+
+
+/* $.getJSON("blood_lead.geojson",function(data){
+            // add GeoJSON layer to the map once the file is loaded
+            L.geoJson(data, {
+                
+            }).addTo(map);
+        });*/
+
+
+
+var neighborhoodsLayer = null;
+$.getJSON("blood_lead.geojson",function(data){
+    neighborhoodsLayer = L.geoJson(data, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.bindPopup('Blood lead level: '+feature.properties.num_bll_5p);
+        }
+    }).addTo(map);
+});
+
+
+   
+function onEachFeatureFunc(feature, layer){
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click:     zoomFeature
+    
+    });
+    layer.bindPopup('Blood lead level:'+feature.properties.num_bll_5p)
+}
+;
+    function highlightFeature(e){
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    // for different web browsers
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+function resetHighlight(e) {
+    neighborhoodsLayer.resetStyle(e.target)
+}  ;
+
+function zoomFeature(e){
+    console.log(e.target.getBounds());
+    map.fitBounds(e.target.getBounds().pad(1.5));
+}
+
+L.control.scale({position: 'bottomleft'}).addTo(map);
+
+
+// Create Leaflet Control Object for Legend
+var legend = L.control({position: 'bottomright'});
+
+// Function that runs when legend is added to map
+legend.onAdd = function (map) {
+    // Create Div Element and Populate it with HTML
+    var div = L.DomUtil.create('div', 'legend');            
+    div.innerHTML += '<br>';
+    div.innerHTML += '<i style="background: #404040"></i><p>80+</p>';
+    div.innerHTML += '<i style="background: #bababa"></i><p>60-80</p>';
+    div.innerHTML += '<i style="background: #f4a582"></i><p>30-60</p>';
+     div.innerHTML += '<i style="background: #ca0020"></i><p>0-30</p>';
+    div.innerHTML += '<i style="background: #fff5ee"></i><p>Null</p>';
+    div.innerHTML += '<hr>';
+    div.innerHTML += '<i style="background: ##BFBCBB"></i><p>No Data</p>';
+
+
+    
+    // Return the Legend div containing the HTML content
+    return div;
+};
+
+// Add Legend to Map
+legend.addTo(map);
+
+
+    </script>
+</body>
+</html>
